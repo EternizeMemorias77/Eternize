@@ -36,7 +36,11 @@ a{color:var(--accent)}
 .btn:hover{background:var(--accent2);transform:scale(1.02)}
 .btn.alt{background:transparent;border:2px solid var(--accent);color:var(--accent)}
 .btn.alt:hover{background:var(--accent);color:#fff}
+.btn.secondary{background:#e67e22;border:none}
+.btn.secondary:hover{background:#d35400}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-group{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn-group .btn{flex:1;min-width:200px}
 .hero{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;margin:48px 0}
 .kicker{font-size:.9rem;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
 input[type="number"],input[type="text"],select{padding:10px 12px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:1rem;color:var(--text);width:100%;max-width:100%}
@@ -49,10 +53,13 @@ input[type="number"]:focus,input[type="text"]:focus,select:focus{outline:none;bo
 .warning{color:var(--warning);font-weight:600}
 .modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:1000;justify-content:center;align-items:center}
 .modal-overlay.active{display:flex}
-.modal{background:#fff;border-radius:12px;padding:32px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal{background:#fff;border-radius:12px;padding:32px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:90vh;overflow-y:auto}
 .modal h2{margin-top:0}
 .modal .close{float:right;font-size:28px;cursor:pointer;color:var(--muted)}
 .modal .close:hover{color:var(--text)}
+.modal-content{margin-top:20px}
+.modal-content .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)}
+.modal-content .total{font-weight:600;font-size:1.1rem;background:rgba(139,94,70,.05);padding:12px;border-radius:6px;margin:12px 0}
 @media(max-width:768px){
 .hero{grid-template-columns:1fr;gap:16px}
 .cart{grid-template-columns:1fr;gap:24px}
@@ -60,6 +67,8 @@ input[type="number"]:focus,input[type="text"]:focus,select:focus{outline:none;bo
 .card{padding:16px}
 .card img{margin-bottom:12px}
 section,header{padding:16px 0}
+.btn-group{flex-direction:column}
+.btn-group .btn{min-width:auto}
 }
 </style>
 </head>
@@ -239,7 +248,10 @@ section,header{padding:16px 0}
 <div id="cart-km" class="row"><span>Deslocamento:</span><span>R$ 500,00</span></div>
 </div>
 
-<button class="btn" onclick="finalizarOrcamento()" style="width:100%;margin-top:24px;font-size:1rem;padding:14px;">Finalizar Orçamento no Instagram</button>
+<div class="btn-group">
+<button class="btn" onclick="finalizarOrcamentoInstagram()" style="font-size:1rem;padding:14px;">📲 Enviar no Direct</button>
+<button class="btn secondary" onclick="abrirInstagram()" style="font-size:1rem;padding:14px;">📸 Falar no Instagram</button>
+</div>
 </div>
 
 <div class="card summary">
@@ -254,12 +266,31 @@ section,header{padding:16px 0}
 </div>
 </section>
 
+<!-- Modal para envio via Direct -->
+<div id="modal-direct" class="modal-overlay">
+<div class="modal">
+<span class="close" onclick="fecharModal()">&times;</span>
+<h2>Enviar Orçamento no Direct</h2>
+<div class="modal-content">
+<p>Revise seu orçamento abaixo:</p>
+<div id="modal-resumo"></div>
+<div class="modal-total"></div>
+<p style="margin-top:20px;"><strong>Dados para contato (opcional):</strong></p>
+<input type="text" id="modal-nome" placeholder="Seu nome" style="margin-bottom:12px;">
+<input type="email" id="modal-email" placeholder="Seu email" style="margin-bottom:12px;">
+<input type="tel" id="modal-telefone" placeholder="Seu telefone" style="margin-bottom:12px;">
+<button class="btn" onclick="enviarDirect()" style="width:100%;margin-top:20px;">Enviar Orçamento</button>
+</div>
+</div>
+</div>
+
 <div class="foot">Eternize Memórias • vitrine retrô, foco em conversão e orçamento visual. | <a href="https://www.instagram.com/eternize__memorias?igsh=bm0wYXIwdGdjd3Zy" target="_blank" rel="noopener">@eternize__memorias</a></div>
 </div>
 
 <script>
 // Configuração
 const INSTAGRAM_URL = "https://www.instagram.com/eternize__memorias?igsh=bm0wYXIwdGdjd3Zy";
+const INSTAGRAM_DIRECT_URL = "https://instagram.com/eternize__memorias";
 const BASE_KM = 100;
 const BASE_KM_PRICE = 500;
 const EXTRA_KM_PRICE = 175;
@@ -400,14 +431,7 @@ function atualizarCarrinho() {
   document.getElementById('total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
 }
 
-function finalizarOrcamento() {
-  // Validar seleções
-  if (!cart.pacote.nome && !cart.estacao.nome) {
-    alert('Por favor, selecione um pacote de fotos ou uma estação de memórias para continuar.');
-    return;
-  }
-
-  // Montar mensagem
+function gerarMensagem() {
   const subtotalAdicionais = cart.flutuantes.valor + cart.adicionais.reduce((sum, a) => sum + a.valor, 0);
   const subtotal = cart.pacote.valor + cart.estacao.valor + subtotalAdicionais + cart.deslocamento;
 
@@ -434,19 +458,89 @@ function finalizarOrcamento() {
   }
 
   mensagem += `📍 *Deslocamento:* ${cart.km} km - R$ ${cart.deslocamento.toFixed(2).replace('.', ',')}\n\n`;
-  mensagem += `*TOTAL: R$ ${subtotal.toFixed(2).replace('.', ',')}*\n\n`;
-  mensagem += 'Clique abaixo para confirmar seu orçamento 👇';
+  mensagem += `*💰 TOTAL: R$ ${subtotal.toFixed(2).replace('.', ',')}*`;
 
-  // Enviar para Instagram DM
-  window.open(INSTAGRAM_URL, '_blank');
+  return { mensagem, subtotal };
+}
+
+function finalizarOrcamentoInstagram() {
+  // Validar seleções
+  if (!cart.pacote.nome && !cart.estacao.nome) {
+    alert('Por favor, selecione um pacote de fotos ou uma estação de memórias para continuar.');
+    return;
+  }
+
+  // Abrir modal
+  const { mensagem, subtotal } = gerarMensagem();
+  const subtotalAdicionais = cart.flutuantes.valor + cart.adicionais.reduce((sum, a) => sum + a.valor, 0);
   
-  // Copiar mensagem para clipboard
-  navigator.clipboard.writeText(mensagem).then(() => {
-    alert('Orçamento copiado! Cole a mensagem no Instagram para a Eternize Memórias.\n\n' + mensagem);
+  let htmlResumo = '';
+  if (cart.pacote.nome) {
+    htmlResumo += `<div class="row"><span>${cart.pacote.nome}</span><span>R$ ${cart.pacote.valor.toFixed(2).replace('.', ',')}</span></div>`;
+  }
+  if (cart.estacao.nome) {
+    htmlResumo += `<div class="row"><span>${cart.estacao.nome}</span><span>R$ ${cart.estacao.valor.toFixed(2).replace('.', ',')}</span></div>`;
+  }
+  if (cart.flutuantes.ativo) {
+    htmlResumo += `<div class="row"><span>Memórias Flutuantes</span><span>R$ 350,00</span></div>`;
+  }
+  cart.adicionais.forEach(add => {
+    const precoText = add.valor > 0 ? `R$ ${add.valor.toFixed(2).replace('.', ',')}` : add.preco;
+    htmlResumo += `<div class="row"><span>${add.nome}</span><span>${precoText}</span></div>`;
+  });
+  htmlResumo += `<div class="row"><span>Deslocamento (${cart.km}km)</span><span>R$ ${cart.deslocamento.toFixed(2).replace('.', ',')}</span></div>`;
+  
+  document.getElementById('modal-resumo').innerHTML = htmlResumo;
+  document.querySelector('.modal-total').innerHTML = `<div class="total"><span>TOTAL</span><span>R$ ${subtotal.toFixed(2).replace('.', ',')}</span></div>`;
+  
+  document.getElementById('modal-direct').classList.add('active');
+}
+
+function fecharModal() {
+  document.getElementById('modal-direct').classList.remove('active');
+}
+
+function enviarDirect() {
+  if (!cart.pacote.nome && !cart.estacao.nome) {
+    alert('Por favor, selecione um pacote de fotos ou uma estação de memórias para continuar.');
+    return;
+  }
+
+  const { mensagem } = gerarMensagem();
+  const nome = document.getElementById('modal-nome').value;
+  const email = document.getElementById('modal-email').value;
+  const telefone = document.getElementById('modal-telefone').value;
+
+  let mensagemCompleta = mensagem;
+  
+  if (nome || email || telefone) {
+    mensagemCompleta += '\n\n*Dados de Contato:*\n';
+    if (nome) mensagemCompleta += `Nome: ${nome}\n`;
+    if (email) mensagemCompleta += `Email: ${email}\n`;
+    if (telefone) mensagemCompleta += `Telefone: ${telefone}\n`;
+  }
+
+  // Copiar para clipboard
+  navigator.clipboard.writeText(mensagemCompleta).then(() => {
+    alert('✅ Orçamento copiado com sucesso!\n\nAgora clique em "Falar no Instagram" para abrir o Direct e colar a mensagem.');
+    fecharModal();
+    abrirInstagram();
   }).catch(() => {
-    alert('Orçamento:\n\n' + mensagem);
+    alert('Orçamento:\n\n' + mensagemCompleta + '\n\nCopie esta mensagem e envie pelo Direct no Instagram para @eternize__memorias');
+    fecharModal();
   });
 }
+
+function abrirInstagram() {
+  window.open(INSTAGRAM_URL, '_blank');
+}
+
+// Fechar modal ao clicar fora
+document.getElementById('modal-direct').addEventListener('click', function(e) {
+  if (e.target === this) {
+    fecharModal();
+  }
+});
 
 // Inicializar
 atualizarCarrinho();
