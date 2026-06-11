@@ -71,7 +71,7 @@ section,header{padding:16px 0}
 <h1>Eternize Memórias</h1>
 <p>Uma vitrine elegante em creme e marrom retrô, criada para vender rápido, com leitura simples e foco nas estações.</p>
 <a class="btn" href="#carrinho">Fazer Orçamento</a>
-<a class="btn alt" href="#estações">Ver Estações</a>
+<a class="btn alt" href="https://www.instagram.com/eternize__memorias?igsh=bm0wYXIwdGdjd3Zy" target="_blank" rel="noopener">Seguir no Instagram</a>
 <p class="note">Pacotes simples = apenas fotos. As estações recebem destaque visual com imagens grandes, valores e ideias curtas.</p>
 </div>
 <div class="card"><img src="assets/1000341250.jpg" alt="Chuva de Memórias em rosas"></div>
@@ -239,7 +239,7 @@ section,header{padding:16px 0}
 <div id="cart-km" class="row"><span>Deslocamento:</span><span>R$ 500,00</span></div>
 </div>
 
-<button class="btn" onclick="finalizarOrcamento()" style="width:100%;margin-top:24px;font-size:1rem;padding:14px;">Finalizar Orçamento no WhatsApp</button>
+<button class="btn" onclick="finalizarOrcamento()" style="width:100%;margin-top:24px;font-size:1rem;padding:14px;">Finalizar Orçamento no Instagram</button>
 </div>
 
 <div class="card summary">
@@ -254,12 +254,12 @@ section,header{padding:16px 0}
 </div>
 </section>
 
-<div class="foot">Eternize Memórias • vitrine retrô, foco em conversão e orçamento visual.</div>
+<div class="foot">Eternize Memórias • vitrine retrô, foco em conversão e orçamento visual. | <a href="https://www.instagram.com/eternize__memorias?igsh=bm0wYXIwdGdjd3Zy" target="_blank" rel="noopener">@eternize__memorias</a></div>
 </div>
 
 <script>
 // Configuração
-const WHATSAPP_NUMBER = "5521999999999"; // Substitua pelo número real
+const INSTAGRAM_URL = "https://www.instagram.com/eternize__memorias?igsh=bm0wYXIwdGdjd3Zy";
 const BASE_KM = 100;
 const BASE_KM_PRICE = 500;
 const EXTRA_KM_PRICE = 175;
@@ -407,7 +407,7 @@ function finalizarOrcamento() {
     return;
   }
 
-  // Montar mensagem para WhatsApp
+  // Montar mensagem
   const subtotalAdicionais = cart.flutuantes.valor + cart.adicionais.reduce((sum, a) => sum + a.valor, 0);
   const subtotal = cart.pacote.valor + cart.estacao.valor + subtotalAdicionais + cart.deslocamento;
 
@@ -434,11 +434,18 @@ function finalizarOrcamento() {
   }
 
   mensagem += `📍 *Deslocamento:* ${cart.km} km - R$ ${cart.deslocamento.toFixed(2).replace('.', ',')}\n\n`;
-  mensagem += `*TOTAL: R$ ${subtotal.toFixed(2).replace('.', ',')}*`;
+  mensagem += `*TOTAL: R$ ${subtotal.toFixed(2).replace('.', ',')}*\n\n`;
+  mensagem += 'Clique abaixo para confirmar seu orçamento 👇';
 
-  // Enviar para WhatsApp
-  const urlWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensagem)}`;
-  window.open(urlWhatsApp, '_blank');
+  // Enviar para Instagram DM
+  window.open(INSTAGRAM_URL, '_blank');
+  
+  // Copiar mensagem para clipboard
+  navigator.clipboard.writeText(mensagem).then(() => {
+    alert('Orçamento copiado! Cole a mensagem no Instagram para a Eternize Memórias.\n\n' + mensagem);
+  }).catch(() => {
+    alert('Orçamento:\n\n' + mensagem);
+  });
 }
 
 // Inicializar
