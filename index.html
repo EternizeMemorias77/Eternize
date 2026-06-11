@@ -5,9 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Eternize Memórias</title>
 <style>
-:root{--bg:#f7ece0;--panel:#fffaf4;--text:#4a3327;--muted:#7c6353;--accent:#8b5e46;--accent2:#b28a6b;--line:#ddc8b8;--shadow:0 18px 42px rgba(74,51,39,.10)}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top left,rgba(178,138,107,.16),transparent 24%),linear-gradient(180deg,#fbf4ec,#f1e0cf);color:var(--text)}img{display:block;max-width:100%}a{text-decoration:none;color:inherit}
-.wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}section,header{padding:24px 0}h1,h2,h3{margin:0 0 10px;font-family:Georgia,serif;letter-spacing:.2px}h1{font-size:clamp(2.5rem,5vw,4.6rem)}h2{font-size:clamp(1.9rem,3vw,2.8rem)}p{line-height:1.7;color:var(--muted);margin:0 0 10px}.grid,.hero,.cart{display:grid;gap:18px}.hero{grid-template-columns:1.05fr .95fr;align-items:stretch}.card{background:rgba(255,250,244,.97);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow)}.copy{padding:28px}.btn{display:inline-block;padding:13px 18px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;margin:8px 10px 0 0;font-weight:700}.btn.alt{background:transparent;color:var(--accent);border:1px solid var(--accent)}.hero img{width:100%;height:100%;object-fit:cover}.grid{grid-template-columns:repeat(3,1fr)}.item img{width:100%;height:260px;object-fit:cover}.large img{height:380px}.meta{padding:16px 18px 20px}.price{font-weight:700;color:var(--accent);margin-top:6px;font-size:1.06rem}.tag{display:inline-block;background:#f0e2d6;border-radius:999px;padding:6px 11px;font-size:.8rem;margin-top:8px}.sel{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:.95rem}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:12px}.section-head p{max-width:60ch}.stations{grid-template-columns:repeat(2,1fr)}.stations .meta p{min-height:66px}.featured{border:1px solid #ceb49f;background:linear-gradient(180deg,#fffaf4,#f8eadc)}.featured .price{font-size:1.22rem}.cart{grid-template-columns:1.1fr .9fr;align-items:start}.summary{position:sticky;top:18px;padding:22px}.row{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}.total{display:flex;justify-content:space-between;font-size:1.25rem;font-weight:700;padding-top:12px}.small{font-size:.92rem}.note{background:#f0e2d6;padding:12px 14px;border-radius:16px;border:1px solid var(--line);color:var(--muted)}input[type=number]{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--text)}.kicker{display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.2em;font-size:.74rem;color:var(--accent2);margin-bottom:8px}.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:16px 0 0}.foot{padding:24px 0 40px;color:var(--muted)}@media(max-width:980px){.hero,.grid,.cart,.stations{grid-template-columns:1fr}.item img{height:220px}.large img{height:290px}.section-head{flex-direction:column;align-items:flex-start}}
+:root{--bg:#f7ece0;--panel:#fffaf4;--text:#4a3327;--muted:#7c6353;--accent:#8b5e46;--accent2:#b28a6b;--line:#ddc8b8;--shadow:0 18px 42px rgba(74,51,39,.10);--success:#27ae60;--warning:#f39c12}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top left,rgba(178,138,107,.16),transparent 24%),linear-gradient(180deg,#fbf4ec,#f1e0cf);color:var(--text);line-height:1.6}
+.wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}section,header{padding:24px 0}h1,h2,h3{margin:0 0 10px;font-family:Georgia,serif;letter-spacing:.2px}h1{font-size:clamp(2.5rem,5vw,4.6rem)}h2{font-size:clamp(1.8rem,4vw,2.5rem)}h3{font-size:1.1rem}
+p{margin:0 0 10px}
+.small{font-size:.85rem;color:var(--muted)}.note{font-size:.85rem;color:var(--muted);font-style:italic}
+a{color:var(--accent)}
+.card{border-radius:12px;padding:24px;background:var(--panel);box-shadow:var(--shadow);margin-bottom:16px}
+.card img{width:100%;height:auto;border-radius:8px;display:block;margin-bottom:12px}
+.card.copy{background:transparent;box-shadow:none;padding:0}
+.section-head{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:flex-end;margin-bottom:24px}
+.section-head>div:first-child{grid-column:1/-1}
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:none}
+.row span:first-child{font-weight:500}
+.row span:last-child{color:var(--muted)}
+.divider{height:2px;background:var(--line);margin:16px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px}
+.grid.stations{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card.item{cursor:pointer;transition:all .2s;position:relative}
+.card.item:hover{transform:translateY(-4px);box-shadow:0 24px 48px rgba(74,51,39,.15)}
+.card.item.large{grid-column:span 1}
+.card.item.featured{border:2px solid var(--accent)}
+.card.item .meta{padding:12px 0;border-top:1px solid var(--line)}
+.card.item .price{font-weight:600;color:var(--accent);margin:8px 0}
+.card.item .sel{margin-top:12px;display:flex;gap:8px;align-items:center}
+.card.item .sel input[type="radio"],.card.item .sel input[type="checkbox"]{cursor:pointer;width:20px;height:20px;accent-color:var(--accent)}
+.card.item .sel label{cursor:pointer;flex:1}
+.btn{display:inline-block;padding:12px 24px;background:var(--accent);color:#fff;border:none;border-radius:6px;text-decoration:none;font-weight:500;cursor:pointer;transition:all .2s;text-align:center}
+.btn:hover{background:var(--accent2);transform:scale(1.02)}
+.btn.alt{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+.btn.alt:hover{background:var(--accent);color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;margin:48px 0}
+.kicker{font-size:.9rem;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+input[type="number"],input[type="text"],select{padding:10px 12px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:1rem;color:var(--text);width:100%;max-width:100%}
+input[type="number"]:focus,input[type="text"]:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(139,94,70,.1)}
+.cart{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:48px 0}
+.cart .card.summary{background:var(--panel);border-left:4px solid var(--accent)}
+.cart .card.summary .total{background:rgba(139,94,70,.05);padding:12px;border-radius:6px;font-weight:600;font-size:1.2rem;margin-top:12px}
+.foot{text-align:center;padding:32px 0;color:var(--muted);border-top:1px solid var(--line);margin-top:48px}
+.success{color:var(--success);font-weight:600}
+.warning{color:var(--warning);font-weight:600}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:1000;justify-content:center;align-items:center}
+.modal-overlay.active{display:flex}
+.modal{background:#fff;border-radius:12px;padding:32px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal h2{margin-top:0}
+.modal .close{float:right;font-size:28px;cursor:pointer;color:var(--muted)}
+.modal .close:hover{color:var(--text)}
+@media(max-width:768px){
+.hero{grid-template-columns:1fr;gap:16px}
+.cart{grid-template-columns:1fr;gap:24px}
+.grid.stations{grid-template-columns:1fr}
+.card{padding:16px}
+.card img{margin-bottom:12px}
+section,header{padding:16px 0}
+}
 </style>
 </head>
 <body>
@@ -17,66 +70,379 @@
 <div class="kicker">Fotos instantâneas • decoração • orçamento</div>
 <h1>Eternize Memórias</h1>
 <p>Uma vitrine elegante em creme e marrom retrô, criada para vender rápido, com leitura simples e foco nas estações.</p>
-<a class="btn" href="https://instagram.com/Eternize__Memorias" target="_blank" rel="noopener">Falar no Instagram</a>
-<a class="btn alt" href="#estações">Ver estações</a>
+<a class="btn" href="#carrinho">Fazer Orçamento</a>
+<a class="btn alt" href="#estações">Ver Estações</a>
 <p class="note">Pacotes simples = apenas fotos. As estações recebem destaque visual com imagens grandes, valores e ideias curtas.</p>
 </div>
 <div class="card"><img src="assets/1000341250.jpg" alt="Chuva de Memórias em rosas"></div>
 </header>
 
 <section id="pacotes">
-<div class="section-head"><div><h2>Pacotes de fotos</h2><p class="small">Resumo limpo, sem imagem de referência.</p></div></div>
-<div class="card copy">
-<div class="row"><span>Essencial</span><span>20 fotos • R$250,00</span></div>
-<div class="row"><span>Vintage</span><span>40 fotos • R$480,00</span></div>
-<div class="row"><span>Retro</span><span>60 fotos • R$660,00</span></div>
-<div class="row"><span>Diamont</span><span>80 fotos • R$800,00</span></div>
-<div class="row"><span>Premium</span><span>100 fotos • R$950,00</span></div>
-<div class="divider"></div>
+<div class="section-head"><div><h2>Pacotes de fotos</h2><p class="small">Selecione a opção desejada. Pacotes simples = apenas fotos.</p></div></div>
+<div class="grid">
+<div class="card item">
+<div class="meta"><h3>Essencial</h3><div class="price">R$ 250,00</div><p class="small">20 fotos</p></div>
+<div class="sel"><input type="radio" id="pkg-essencial" name="pacote" value="250" data-nome="Essencial - 20 fotos"><label for="pkg-essencial">Selecionar</label></div>
+</div>
+<div class="card item">
+<div class="meta"><h3>Vintage</h3><div class="price">R$ 480,00</div><p class="small">40 fotos</p></div>
+<div class="sel"><input type="radio" id="pkg-vintage" name="pacote" value="480" data-nome="Vintage - 40 fotos"><label for="pkg-vintage">Selecionar</label></div>
+</div>
+<div class="card item">
+<div class="meta"><h3>Retro</h3><div class="price">R$ 660,00</div><p class="small">60 fotos</p></div>
+<div class="sel"><input type="radio" id="pkg-retro" name="pacote" value="660" data-nome="Retro - 60 fotos"><label for="pkg-retro">Selecionar</label></div>
+</div>
+<div class="card item">
+<div class="meta"><h3>Diamont</h3><div class="price">R$ 800,00</div><p class="small">80 fotos</p></div>
+<div class="sel"><input type="radio" id="pkg-diamont" name="pacote" value="800" data-nome="Diamont - 80 fotos"><label for="pkg-diamont">Selecionar</label></div>
+</div>
+<div class="card item">
+<div class="meta"><h3>Premium</h3><div class="price">R$ 950,00</div><p class="small">100 fotos</p></div>
+<div class="sel"><input type="radio" id="pkg-premium" name="pacote" value="950" data-nome="Premium - 100 fotos"><label for="pkg-premium">Selecionar</label></div>
+</div>
 </div>
 </section>
 
 <section id="estações">
-<div class="section-head"><div><h2>Estações de Memórias</h2><p>Cards altos e sofisticados para despertar desejo, com prioridade visual para Potes de Memórias e os itens premium.</p></div></div>
+<div class="section-head"><div><h2>Estações de Memórias</h2><p>Cards sofisticados para despertar desejo. Selecione uma estação.</p></div></div>
 <div class="grid stations">
-<div class="card item large featured"><img src="assets/1000341910.jpg" alt="Potes de Memórias"><div class="meta"><h3>Potes de Memórias</h3><div class="price">60 fotos R$715,00 • 80 fotos R$885,00 • 100 fotos R$1.050,00</div><p>As fotos podem ser entregues aos convidados como lembrança. A passarela de potes completa a experiência.</p><div class="tag">Passarela de potes R$270,00 • aprox. 46 potes</div><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
-<div class="card item large featured"><img src="assets/1000341250.jpg" alt="Chuva de Memórias em rosas"><div class="meta"><h3>Chuva de Memórias em rosas</h3><div class="price">R$1.200,00</div><p>As polaroids podem ser entregues aos convidados junto com a rosa ao final do evento.</p><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
-<div class="card item large featured"><img src="assets/1000341922.jpg" alt="Ombrelone de Memórias"><div class="meta"><h3>Ombrelone de Memórias</h3><div class="price">R$1.200,00</div><p>Visual sofisticado com entrega das fotos em tule como lembrança.</p><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
-<div class="card item large featured"><img src="assets/1000341260.jpg" alt="Nuvem de Memórias"><div class="meta"><h3>Nuvem de Memórias</h3><div class="price">R$770,00</div><p>Decoração leve e elegante para destacar as fotos no ambiente.</p><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
-<div class="card item large featured"><img src="assets/1000341894.jpg" alt="Memórias Flutuantes"><div class="meta"><h3>Memórias Flutuantes</h3><div class="price">Primeiro adicional da estação</div><p>Ideia mais simples para começar a composição do evento.</p><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+<div class="card item large featured">
+<img src="assets/1000341910.jpg" alt="Potes de Memórias">
+<div class="meta">
+<h3>Potes de Memórias</h3>
+<div class="price">R$ 715,00 a R$ 885,00</div>
+<p class="small">60 ou 80 fotos em potes retrô</p>
+<div class="sel">
+<input type="radio" id="estacao-potes-60" name="estacao" value="715" data-nome="Potes de Memórias (60 fotos)">
+<label for="estacao-potes-60">60 fotos (R$ 715)</label>
+</div>
+<div class="sel">
+<input type="radio" id="estacao-potes-80" name="estacao" value="885" data-nome="Potes de Memórias (80 fotos)">
+<label for="estacao-potes-80">80 fotos (R$ 885)</label>
+</div>
+</div>
+</div>
+
+<div class="card item large featured">
+<img src="assets/1000341250.jpg" alt="Chuva de Memórias em rosas">
+<div class="meta">
+<h3>Chuva de Memórias</h3>
+<div class="price">R$ 1.200,00</div>
+<p class="small">Decoração suspensa com fotos</p>
+<div class="sel">
+<input type="radio" id="estacao-chuva" name="estacao" value="1200" data-nome="Chuva de Memórias em rosas">
+<label for="estacao-chuva">Selecionar</label>
+</div>
+</div>
+</div>
+
+<div class="card item large featured">
+<img src="assets/1000341922.jpg" alt="Ombrelone de Memórias">
+<div class="meta">
+<h3>Ombrelone de Memórias</h3>
+<div class="price">R$ 1.200,00</div>
+<p class="small">Visual sofisticado em ombrelone</p>
+<div class="sel">
+<input type="radio" id="estacao-ombrelone" name="estacao" value="1200" data-nome="Ombrelone de Memórias">
+<label for="estacao-ombrelone">Selecionar</label>
+</div>
+</div>
+</div>
+
+<div class="card item large featured">
+<img src="assets/1000341260.jpg" alt="Nuvem de Memórias">
+<div class="meta">
+<h3>Nuvem de Memórias</h3>
+<div class="price">R$ 770,00</div>
+<p class="small">Decoração leve e elegante</p>
+<div class="sel">
+<input type="radio" id="estacao-nuvem" name="estacao" value="770" data-nome="Nuvem de Memórias">
+<label for="estacao-nuvem">Selecionar</label>
+</div>
+</div>
+</div>
+
+<div class="card item large featured">
+<img src="assets/1000341894.jpg" alt="Memórias Flutuantes">
+<div class="meta">
+<h3>Memórias Flutuantes</h3>
+<div class="price">Primeiro adicional da estação</div>
+<p class="small">Complemento premium para qualquer estação</p>
+<div class="sel">
+<input type="checkbox" id="estacao-flutuantes" value="350" data-nome="Memórias Flutuantes (+R$ 350)">
+<label for="estacao-flutuantes">Adicionar (+ R$ 350)</label>
+</div>
+</div>
+</div>
 </div>
 </section>
 
 <section>
-<div class="section-head"><div><h2>Outros adicionais</h2><p>Complementos discretos para fechar o orçamento sem poluir a vitrine.</p></div></div>
+<div class="section-head"><div><h2>Outros Adicionais</h2><p>Complementos discretos para fechar o orçamento.</p></div></div>
 <div class="grid">
-<div class="card item"><img src="assets/1000341912.jpg" alt="Porta Polaroid"><div class="meta"><h3>Porta Polaroid</h3><div class="price">Sob orçamento</div><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
-<div class="card item"><img src="assets/1000341390.jpg" alt="Álbum personalizável"><div class="meta"><h3>Álbum personalizável</h3><div class="price">Sob orçamento</div><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
-<div class="card item"><img src="assets/1000341392.jpg" alt="Suporte de fotos"><div class="meta"><h3>Suporte de fotos</h3><div class="price">Sob orçamento</div><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+<div class="card item">
+<img src="assets/1000341912.jpg" alt="Porta Polaroid">
+<div class="meta">
+<h3>Porta Polaroid</h3>
+<div class="price">Sob orçamento</div>
+<div class="sel">
+<input type="checkbox" id="adicional-porta" value="0" data-nome="Porta Polaroid" data-preco="Sob orçamento">
+<label for="adicional-porta">Solicitar orçamento</label>
+</div>
+</div>
+</div>
+
+<div class="card item">
+<img src="assets/1000341390.jpg" alt="Álbum personalizável">
+<div class="meta">
+<h3>Álbum Personalizável</h3>
+<div class="price">Sob orçamento</div>
+<div class="sel">
+<input type="checkbox" id="adicional-album" value="0" data-nome="Álbum Personalizável" data-preco="Sob orçamento">
+<label for="adicional-album">Solicitar orçamento</label>
+</div>
+</div>
+</div>
+
+<div class="card item">
+<img src="assets/1000341392.jpg" alt="Suporte de fotos">
+<div class="meta">
+<h3>Suporte de Fotos</h3>
+<div class="price">Sob orçamento</div>
+<div class="sel">
+<input type="checkbox" id="adicional-suporte" value="0" data-nome="Suporte de Fotos" data-preco="Sob orçamento">
+<label for="adicional-suporte">Solicitar orçamento</label>
+</div>
+</div>
+</div>
 </div>
 </section>
 
 <section class="cart" id="carrinho">
 <div class="card copy">
-<h2>Carrinho de orçamento</h2>
-<div class="row"><span>Pacote de fotos</span><span>Selecionar</span></div>
-<div class="row"><span>Estação de Memórias</span><span>Selecionar</span></div>
-<div class="row"><span>Adicionais</span><span>Selecionar</span></div>
-<div class="row"><span>Deslocamento</span><span>Editável</span></div>
-<p class="small">Km do deslocamento</p>
-<input type="number" value="100" />
-<p class="note">A partir de 100 km: R$500,00. A cada 100 km a mais: +R$175,00.</p>
-<a class="btn" href="https://instagram.com/Eternize__Memorias" target="_blank" rel="noopener">Fechar no Instagram</a>
+<h2>Carrinho de Orçamento</h2>
+
+<div style="margin-top:20px;">
+<p><strong>Pacote de fotos</strong></p>
+<div id="cart-pacote" class="row"><span>Status:</span><span class="warning">Não selecionado</span></div>
+
+<p style="margin-top:16px;"><strong>Estação de Memórias</strong></p>
+<div id="cart-estacao" class="row"><span>Status:</span><span class="warning">Não selecionada</span></div>
+
+<p style="margin-top:16px;"><strong>Adicionais Selecionados</strong></p>
+<div id="cart-adicionais" style="margin:12px 0;"><span class="small">Nenhum adicional selecionado</span></div>
+
+<p style="margin-top:16px;"><strong>Deslocamento</strong></p>
+<p class="small">Digite a distância em km</p>
+<input type="number" id="km-input" value="100" min="0" max="999">
+<p class="note">Base: a partir de 100 km = R$ 500,00. A cada 100 km = + R$ 175,00</p>
+<div id="cart-km" class="row"><span>Deslocamento:</span><span>R$ 500,00</span></div>
 </div>
+
+<button class="btn" onclick="finalizarOrcamento()" style="width:100%;margin-top:24px;font-size:1rem;padding:14px;">Finalizar Orçamento no WhatsApp</button>
+</div>
+
 <div class="card summary">
-<h3>Resumo</h3>
-<div class="row"><span>Subtotal</span><span>Automático</span></div>
-<div class="row"><span>Km</span><span>Editável</span></div>
-<div class="total"><span>Total</span><span>Automático</span></div>
+<h3>Resumo do Orçamento</h3>
+<div class="row"><span>Pacote</span><span id="subtotal-pacote">R$ 0,00</span></div>
+<div class="row"><span>Estação</span><span id="subtotal-estacao">R$ 0,00</span></div>
+<div class="row"><span>Adicionais</span><span id="subtotal-adicionais">R$ 0,00</span></div>
+<div class="row"><span>Deslocamento</span><span id="subtotal-km">R$ 500,00</span></div>
+<div class="divider"></div>
+<div class="row"><span>Subtotal</span><span id="subtotal" class="warning">R$ 0,00</span></div>
+<div class="total" style="margin-top:12px;"><span>Total</span><span id="total" class="warning">R$ 0,00</span></div>
 </div>
 </section>
 
 <div class="foot">Eternize Memórias • vitrine retrô, foco em conversão e orçamento visual.</div>
 </div>
+
+<script>
+// Configuração
+const WHATSAPP_NUMBER = "5521999999999"; // Substitua pelo número real
+const BASE_KM = 100;
+const BASE_KM_PRICE = 500;
+const EXTRA_KM_PRICE = 175;
+
+// Elementos do DOM
+const inputs = {
+  pacote: document.querySelectorAll('input[name="pacote"]'),
+  estacao: document.querySelectorAll('input[name="estacao"]'),
+  flutuantes: document.getElementById('estacao-flutuantes'),
+  adicionais: document.querySelectorAll('input[type="checkbox"]:not([name="estacao"])'),
+  km: document.getElementById('km-input')
+};
+
+// Estado do carrinho
+let cart = {
+  pacote: { nome: null, valor: 0 },
+  estacao: { nome: null, valor: 0 },
+  flutuantes: { ativo: false, valor: 0 },
+  adicionais: [],
+  km: 100,
+  deslocamento: 500
+};
+
+// Event listeners
+inputs.pacote.forEach(input => {
+  input.addEventListener('change', () => {
+    cart.pacote = {
+      nome: input.dataset.nome,
+      valor: parseFloat(input.value)
+    };
+    atualizarCarrinho();
+  });
+});
+
+inputs.estacao.forEach(input => {
+  input.addEventListener('change', () => {
+    if (input.type === 'radio') {
+      cart.estacao = {
+        nome: input.dataset.nome,
+        valor: parseFloat(input.value)
+      };
+    }
+    atualizarCarrinho();
+  });
+});
+
+inputs.flutuantes.addEventListener('change', () => {
+  if (inputs.flutuantes.checked) {
+    cart.flutuantes = {
+      ativo: true,
+      valor: parseFloat(inputs.flutuantes.value)
+    };
+  } else {
+    cart.flutuantes = { ativo: false, valor: 0 };
+  }
+  atualizarCarrinho();
+});
+
+inputs.adicionais.forEach(input => {
+  input.addEventListener('change', () => {
+    cart.adicionais = Array.from(inputs.adicionais)
+      .filter(i => i.checked)
+      .map(i => ({
+        nome: i.dataset.nome,
+        valor: parseFloat(i.value) || 0,
+        preco: i.dataset.preco
+      }));
+    atualizarCarrinho();
+  });
+});
+
+inputs.km.addEventListener('change', () => {
+  const km = parseInt(inputs.km.value) || 100;
+  cart.km = Math.max(km, 0);
+  cart.deslocamento = calcularDeslocamento(cart.km);
+  atualizarCarrinho();
+});
+
+function calcularDeslocamento(km) {
+  if (km < BASE_KM) return 0;
+  if (km === BASE_KM) return BASE_KM_PRICE;
+  
+  const kmExtras = km - BASE_KM;
+  const multiplos = Math.ceil(kmExtras / BASE_KM);
+  return BASE_KM_PRICE + (multiplos * EXTRA_KM_PRICE);
+}
+
+function atualizarCarrinho() {
+  // Atualizar exibição do carrinho
+  const pacoteEl = document.getElementById('cart-pacote').querySelector('span:last-child');
+  const estacaoEl = document.getElementById('cart-estacao').querySelector('span:last-child');
+  const adicionaisEl = document.getElementById('cart-adicionais');
+  const kmEl = document.getElementById('cart-km').querySelector('span:last-child');
+
+  if (cart.pacote.nome) {
+    pacoteEl.textContent = cart.pacote.nome;
+    pacoteEl.className = 'success';
+  } else {
+    pacoteEl.textContent = 'Não selecionado';
+    pacoteEl.className = 'warning';
+  }
+
+  if (cart.estacao.nome) {
+    estacaoEl.textContent = cart.estacao.nome;
+    estacaoEl.className = 'success';
+  } else {
+    estacaoEl.textContent = 'Não selecionada';
+    estacaoEl.className = 'warning';
+  }
+
+  // Adicionais
+  let htmlAdicionais = '';
+  if (cart.flutuantes.ativo) {
+    htmlAdicionais += '<div class="row"><span>Memórias Flutuantes</span><span class="success">R$ 350,00</span></div>';
+  }
+  cart.adicionais.forEach(add => {
+    const precoText = add.valor > 0 ? `R$ ${add.valor.toFixed(2).replace('.', ',')}` : add.preco;
+    htmlAdicionais += `<div class="row"><span>${add.nome}</span><span>${precoText}</span></div>`;
+  });
+  if (!htmlAdicionais) {
+    htmlAdicionais = '<span class="small">Nenhum adicional selecionado</span>';
+  }
+  adicionaisEl.innerHTML = htmlAdicionais;
+
+  // Deslocamento
+  kmEl.textContent = `R$ ${cart.deslocamento.toFixed(2).replace('.', ',')}`;
+
+  // Totais
+  const subtotalAdicionais = cart.flutuantes.valor + cart.adicionais.reduce((sum, a) => sum + a.valor, 0);
+  const subtotal = cart.pacote.valor + cart.estacao.valor + subtotalAdicionais + cart.deslocamento;
+  const total = subtotal;
+
+  document.getElementById('subtotal-pacote').textContent = `R$ ${cart.pacote.valor.toFixed(2).replace('.', ',')}`;
+  document.getElementById('subtotal-estacao').textContent = `R$ ${cart.estacao.valor.toFixed(2).replace('.', ',')}`;
+  document.getElementById('subtotal-adicionais').textContent = `R$ ${subtotalAdicionais.toFixed(2).replace('.', ',')}`;
+  document.getElementById('subtotal-km').textContent = `R$ ${cart.deslocamento.toFixed(2).replace('.', ',')}`;
+  document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+  document.getElementById('total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+function finalizarOrcamento() {
+  // Validar seleções
+  if (!cart.pacote.nome && !cart.estacao.nome) {
+    alert('Por favor, selecione um pacote de fotos ou uma estação de memórias para continuar.');
+    return;
+  }
+
+  // Montar mensagem para WhatsApp
+  const subtotalAdicionais = cart.flutuantes.valor + cart.adicionais.reduce((sum, a) => sum + a.valor, 0);
+  const subtotal = cart.pacote.valor + cart.estacao.valor + subtotalAdicionais + cart.deslocamento;
+
+  let mensagem = '*Eternize Memórias - Solicitação de Orçamento*\n\n';
+  
+  if (cart.pacote.nome) {
+    mensagem += `📷 *Pacote:* ${cart.pacote.nome}\n   Valor: R$ ${cart.pacote.valor.toFixed(2).replace('.', ',')}\n\n`;
+  }
+  
+  if (cart.estacao.nome) {
+    mensagem += `✨ *Estação:* ${cart.estacao.nome}\n   Valor: R$ ${cart.estacao.valor.toFixed(2).replace('.', ',')}\n\n`;
+  }
+
+  if (cart.flutuantes.ativo || cart.adicionais.length > 0) {
+    mensagem += '🎁 *Adicionais:*\n';
+    if (cart.flutuantes.ativo) {
+      mensagem += `   • Memórias Flutuantes: R$ ${cart.flutuantes.valor.toFixed(2).replace('.', ',')}\n`;
+    }
+    cart.adicionais.forEach(add => {
+      const precoText = add.valor > 0 ? `R$ ${add.valor.toFixed(2).replace('.', ',')}` : add.preco;
+      mensagem += `   • ${add.nome}: ${precoText}\n`;
+    });
+    mensagem += '\n';
+  }
+
+  mensagem += `📍 *Deslocamento:* ${cart.km} km - R$ ${cart.deslocamento.toFixed(2).replace('.', ',')}\n\n`;
+  mensagem += `*TOTAL: R$ ${subtotal.toFixed(2).replace('.', ',')}*`;
+
+  // Enviar para WhatsApp
+  const urlWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensagem)}`;
+  window.open(urlWhatsApp, '_blank');
+}
+
+// Inicializar
+atualizarCarrinho();
+</script>
 </body>
 </html>
