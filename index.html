@@ -1,11 +1,82 @@
-<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,user-scalable=no"><link rel=icon href=favicon.ico><title>wps-template-android-store</title><link href=css/app.css rel=preload as=style><link href=css/chunk-vendors.css rel=preload as=style><link href=js/app.js rel=preload as=script><link href=js/chunk-vendors.js rel=preload as=script><link href=css/chunk-vendors.css rel=stylesheet><link href=css/app.css rel=stylesheet></head><body><noscript><strong>We're sorry but wps-template-android-store doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script>window.heightChange = () => {};
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', 'UA-126555606-10', 'auto');
-      ga('set', 'checkProtocolTask', null);
-      ga('set', 'checkStorageTask', null);
-      ga('set', 'historyImportTask', null);
-      ga('send', 'pageview');</script><script src=js/chunk-vendors.js></script><script src=js/app.js></script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Eternize Memórias</title>
+<style>
+:root{--bg:#f7ece0;--panel:#fffaf4;--text:#4a3327;--muted:#7c6353;--accent:#8b5e46;--accent2:#b28a6b;--line:#ddc8b8;--shadow:0 18px 42px rgba(74,51,39,.10)}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top left,rgba(178,138,107,.16),transparent 24%),linear-gradient(180deg,#fbf4ec,#f1e0cf);color:var(--text)}img{display:block;max-width:100%}a{text-decoration:none;color:inherit}
+.wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}section,header{padding:24px 0}h1,h2,h3{margin:0 0 10px;font-family:Georgia,serif;letter-spacing:.2px}h1{font-size:clamp(2.5rem,5vw,4.6rem)}h2{font-size:clamp(1.9rem,3vw,2.8rem)}p{line-height:1.7;color:var(--muted);margin:0 0 10px}.grid,.hero,.cart{display:grid;gap:18px}.hero{grid-template-columns:1.05fr .95fr;align-items:stretch}.card{background:rgba(255,250,244,.97);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow)}.copy{padding:28px}.btn{display:inline-block;padding:13px 18px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;margin:8px 10px 0 0;font-weight:700}.btn.alt{background:transparent;color:var(--accent);border:1px solid var(--accent)}.hero img{width:100%;height:100%;object-fit:cover}.grid{grid-template-columns:repeat(3,1fr)}.item img{width:100%;height:260px;object-fit:cover}.large img{height:380px}.meta{padding:16px 18px 20px}.price{font-weight:700;color:var(--accent);margin-top:6px;font-size:1.06rem}.tag{display:inline-block;background:#f0e2d6;border-radius:999px;padding:6px 11px;font-size:.8rem;margin-top:8px}.sel{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:.95rem}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:12px}.section-head p{max-width:60ch}.stations{grid-template-columns:repeat(2,1fr)}.stations .meta p{min-height:66px}.featured{border:1px solid #ceb49f;background:linear-gradient(180deg,#fffaf4,#f8eadc)}.featured .price{font-size:1.22rem}.cart{grid-template-columns:1.1fr .9fr;align-items:start}.summary{position:sticky;top:18px;padding:22px}.row{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}.total{display:flex;justify-content:space-between;font-size:1.25rem;font-weight:700;padding-top:12px}.small{font-size:.92rem}.note{background:#f0e2d6;padding:12px 14px;border-radius:16px;border:1px solid var(--line);color:var(--muted)}input[type=number]{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--text)}.kicker{display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.2em;font-size:.74rem;color:var(--accent2);margin-bottom:8px}.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:16px 0 0}.foot{padding:24px 0 40px;color:var(--muted)}@media(max-width:980px){.hero,.grid,.cart,.stations{grid-template-columns:1fr}.item img{height:220px}.large img{height:290px}.section-head{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<div class="card copy">
+<div class="kicker">Fotos instantâneas • decoração • orçamento</div>
+<h1>Eternize Memórias</h1>
+<p>Uma vitrine elegante em creme e marrom retrô, criada para vender rápido, com leitura simples e foco nas estações.</p>
+<a class="btn" href="https://instagram.com/Eternize__Memorias" target="_blank" rel="noopener">Falar no Instagram</a>
+<a class="btn alt" href="#estações">Ver estações</a>
+<p class="note">Pacotes simples = apenas fotos. As estações recebem destaque visual com imagens grandes, valores e ideias curtas.</p>
+</div>
+<div class="card"><img src="assets/1000341250.jpg" alt="Chuva de Memórias em rosas"></div>
+</header>
+
+<section id="pacotes">
+<div class="section-head"><div><h2>Pacotes de fotos</h2><p class="small">Resumo limpo, sem imagem de referência.</p></div></div>
+<div class="card copy">
+<div class="row"><span>Essencial</span><span>20 fotos • R$250,00</span></div>
+<div class="row"><span>Vintage</span><span>40 fotos • R$480,00</span></div>
+<div class="row"><span>Retro</span><span>60 fotos • R$660,00</span></div>
+<div class="row"><span>Diamont</span><span>80 fotos • R$800,00</span></div>
+<div class="row"><span>Premium</span><span>100 fotos • R$950,00</span></div>
+<div class="divider"></div>
+</div>
+</section>
+
+<section id="estações">
+<div class="section-head"><div><h2>Estações de Memórias</h2><p>Cards altos e sofisticados para despertar desejo, com prioridade visual para Potes de Memórias e os itens premium.</p></div></div>
+<div class="grid stations">
+<div class="card item large featured"><img src="assets/1000341910.jpg" alt="Potes de Memórias"><div class="meta"><h3>Potes de Memórias</h3><div class="price">60 fotos R$715,00 • 80 fotos R$885,00 • 100 fotos R$1.050,00</div><p>As fotos podem ser entregues aos convidados como lembrança. A passarela de potes completa a experiência.</p><div class="tag">Passarela de potes R$270,00 • aprox. 46 potes</div><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+<div class="card item large featured"><img src="assets/1000341250.jpg" alt="Chuva de Memórias em rosas"><div class="meta"><h3>Chuva de Memórias em rosas</h3><div class="price">R$1.200,00</div><p>As polaroids podem ser entregues aos convidados junto com a rosa ao final do evento.</p><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+<div class="card item large featured"><img src="assets/1000341922.jpg" alt="Ombrelone de Memórias"><div class="meta"><h3>Ombrelone de Memórias</h3><div class="price">R$1.200,00</div><p>Visual sofisticado com entrega das fotos em tule como lembrança.</p><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+<div class="card item large featured"><img src="assets/1000341260.jpg" alt="Nuvem de Memórias"><div class="meta"><h3>Nuvem de Memórias</h3><div class="price">R$770,00</div><p>Decoração leve e elegante para destacar as fotos no ambiente.</p><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+<div class="card item large featured"><img src="assets/1000341894.jpg" alt="Memórias Flutuantes"><div class="meta"><h3>Memórias Flutuantes</h3><div class="price">Primeiro adicional da estação</div><p>Ideia mais simples para começar a composição do evento.</p><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+</div>
+</section>
+
+<section>
+<div class="section-head"><div><h2>Outros adicionais</h2><p>Complementos discretos para fechar o orçamento sem poluir a vitrine.</p></div></div>
+<div class="grid">
+<div class="card item"><img src="assets/1000341912.jpg" alt="Porta Polaroid"><div class="meta"><h3>Porta Polaroid</h3><div class="price">Sob orçamento</div><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+<div class="card item"><img src="assets/1000341390.jpg" alt="Álbum personalizável"><div class="meta"><h3>Álbum personalizável</h3><div class="price">Sob orçamento</div><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+<div class="card item"><img src="assets/1000341392.jpg" alt="Suporte de fotos"><div class="meta"><h3>Suporte de fotos</h3><div class="price">Sob orçamento</div><div class="sel"><input type="checkbox"><span>Selecionar</span></div></div></div>
+</div>
+</section>
+
+<section class="cart" id="carrinho">
+<div class="card copy">
+<h2>Carrinho de orçamento</h2>
+<div class="row"><span>Pacote de fotos</span><span>Selecionar</span></div>
+<div class="row"><span>Estação de Memórias</span><span>Selecionar</span></div>
+<div class="row"><span>Adicionais</span><span>Selecionar</span></div>
+<div class="row"><span>Deslocamento</span><span>Editável</span></div>
+<p class="small">Km do deslocamento</p>
+<input type="number" value="100" />
+<p class="note">A partir de 100 km: R$500,00. A cada 100 km a mais: +R$175,00.</p>
+<a class="btn" href="https://instagram.com/Eternize__Memorias" target="_blank" rel="noopener">Fechar no Instagram</a>
+</div>
+<div class="card summary">
+<h3>Resumo</h3>
+<div class="row"><span>Subtotal</span><span>Automático</span></div>
+<div class="row"><span>Km</span><span>Editável</span></div>
+<div class="total"><span>Total</span><span>Automático</span></div>
+</div>
+</section>
+
+<div class="foot">Eternize Memórias • vitrine retrô, foco em conversão e orçamento visual.</div>
+</div>
+</body>
+</html>
